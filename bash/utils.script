@@ -1,0 +1,53 @@
+#!/bin/bash
+
+function volume_up {
+amixer set Master $1+
+}
+
+function volume_down {
+amixer set Master $1-
+}
+
+function volume_mute {
+amixer set Master mute
+}
+
+function volume_mute {
+amixer set Master unmute
+}
+
+function screen_off {
+xset dpms force off
+}
+
+function screen_on {
+xset dpms force on
+}
+
+function wifi_scan {
+sudo iwlist wlan0 scan
+}
+
+function play {
+xdotool key XF86AudioPlay
+}
+
+function prev {
+xdotool key XF86AudioPrev 
+}
+
+function next {
+xdotool key XF86AudioNext
+}
+
+function xvolume_down {
+xdotool key XF86AudioLowerVolume 
+}
+
+function xvolume_up {
+xdotool key XF86AudioRaiseVolume
+}
+
+function xvolume_mute {
+xdotool key XF86AudioMute
+}
