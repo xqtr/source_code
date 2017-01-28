@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Compiler Value="/usr/bin/fpc" Date="1244095286"/>
+  <Params Value=" -MObjFPC -Scgi -O1 -gl -WG -vewnhi -l -Fi/home/x/Programming/Components/touch_interface/ -Fu/home/x/Programming/Components/touch_interface/lib/i386-linux/ -Fu/usr/lib/lazarus/0.9.28.2/lcl/units/i386-linux/ -Fu/usr/lib/lazarus/0.9.28.2/lcl/units/i386-linux/gtk2/ -Fu/usr/lib/lazarus/0.9.28.2/packager/units/i386-linux/ -Fu/home/x/Programming/Components/touch_interface/ -Fu. -FE/home/x/Programming/Components/touch_interface/ -oproject1 -dLCL -dLCLgtk2 project1.lpr"/>
+</CONFIG>

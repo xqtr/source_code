@@ -1,0 +1,191 @@
+unit ttouchlabel;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, ExtCtrls, Graphics, Controls;
+
+  type
+
+  { TTSwitchButton }
+
+  { TTLabel }
+
+  { TTtouchlabel }
+
+  TTtouchlabel = class(TImage)
+  private
+    { Private declarations }
+    FAlignment: TAlignment;
+    DBDownPict: TPicture;
+    DBUpPict:   TPicture;
+    DBDisPict:  TPicture;
+    DBEnabled: Boolean;
+    FUp: Boolean;
+    ffont:tfont;
+    fdisfont:tfont;
+    Ftext:string;
+
+    procedure SetDownPict(Value: TPicture);
+    procedure SetUpPict(Value: TPicture);
+    procedure SetDisPict(Value: TPicture);
+    procedure SetAlignment(Value: TAlignment);
+    Procedure SetText(value:string);
+    function  GetAlignment: TAlignment;
+    Procedure SetFont(f:tfont);
+    Procedure SetdisFont(value:tfont);
+    function GetFont:tfont;
+    Function GetDisFont:tfont;
+
+  public
+    { Public declarations }
+    procedure SetEnabled(Value: Boolean);  override;
+    constructor Create(AOwner: TComponent); override;
+    procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
+    Procedure Click; override;
+    destructor Destroy; override;
+    procedure Paint; override;
+  published
+    { Published declarations }
+    property OnPict: TPicture read DBUpPict write SetUpPict;
+    property DownPict: TPicture read DBDownPict write SetDownPict;
+    property DisabledPict: TPicture read DBDisPict write SetDisPict;
+    property Enabled: Boolean read DBEnabled write SetEnabled default true;
+    Property Text:string read ftext write settext;
+    property Alignment: TAlignment read GetAlignment write SetAlignment default taLeftJustify;
+    property Font:tfont read getfont write setfont;
+    property DisFont:tfont read getdisfont write setdisfont;
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Touch', [TTtouchlabel]);
+end;
+
+procedure TTtouchlabel.SetEnabled(Value: Boolean);
+begin
+ if Value = True then
+    Picture:=DBUpPict
+ else Picture:=DBDisPict;
+      DBEnabled:=Value;
+      fup:=value;
+end;
+
+constructor TTtouchlabel.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  DBDownPict:= TPicture.Create;
+  DBUpPict := TPicture.Create;
+  DBDisPict := TPicture.Create;
+  Picture:= DBUpPict;
+  ftext:='';
+  SetEnabled(true);
+end;
+
+procedure TTtouchlabel.SetUpPict(Value: TPicture);
+begin
+  DBUpPict.Assign(Value);
+end;
+
+procedure TTtouchlabel.SetDownPict(Value: TPicture);
+begin
+  DBDownPict.Assign(Value);
+end;
+
+procedure TTtouchlabel.setdisfont(Value: tfont);
+begin
+  fdisfont.Assign(value);
+end;
+
+procedure TTtouchlabel.SetDisPict(Value: TPicture);
+begin
+  DBDisPict.Assign(Value);
+end;
+
+procedure TTtouchlabel.SetAlignment(Value: TAlignment);
+begin
+  if FAlignment <> Value then
+  begin
+    FAlignment := Value;
+    Invalidate;
+  end;
+end;
+
+procedure TTtouchlabel.SetText(value: string);
+begin
+  ftext:=value;
+  invalidate;
+end;
+
+function TTtouchlabel.GetAlignment: TAlignment;
+begin
+    Result := FAlignment;
+end;
+
+procedure TTtouchlabel.SetFont(f: tfont);
+begin
+  ffont.Assign(f);
+  invalidate;
+end;
+
+function TTtouchlabel.GetFont: tfont;
+begin
+  result.Assign(ffont);
+end;
+
+function TTtouchlabel.GetDisFont: tfont;
+begin
+  result.Assign(fdisfont);
+end;
+
+procedure TTtouchlabel.MouseMove(Shift: TShiftState; X, Y: Integer);
+begin
+ inherited;
+ if DBEnabled=True then
+ if fUp then
+  if (X<0)or(X>Width)or(Y<0)or(Y>Height) then
+  begin
+    SetCaptureControl(Self);
+    if fup then Picture:=DBUpPict else picture:=dbdownpict;
+   end;
+end;
+
+procedure TTtouchlabel.Click;
+begin
+  inherited Click;
+end;
+
+destructor TTtouchlabel.Destroy;
+begin
+  DBDownPict.Free;
+  DBUpPict.Free;
+  DBDisPict.Free;
+  inherited Destroy;
+end;
+
+procedure TTtouchlabel.Paint;
+var
+  h,w,y,x:integer;
+begin
+  canvas.GetTextSize(ftext,w,h);
+  y:=(canvas.Height div 2) - (h div 2);
+  x:=(canvas.Width div 2) - (w div 2);
+  if FAlignment=taLeftJustify then begin
+    canvas.TextOut(0,y,ftext);
+  end;
+  if FAlignment=taRightJustify then begin
+    canvas.TextOut(canvas.width-w,y,ftext);
+  end;
+  if FAlignment=taCenter then begin
+    canvas.TextOut(x,y,ftext);
+  end;
+end;
+
+end.
+

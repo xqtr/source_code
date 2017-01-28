@@ -1,0 +1,31 @@
+unit VertButtonSlider;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls;
+
+type
+  TVertButtonSlider = class(TImage)
+  private
+    { Private declarations }
+  protected
+    { Protected declarations }
+  public
+    { Public declarations }
+  published
+    { Published declarations }
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Touch',[TVertButtonSlider]);
+end;
+
+end.

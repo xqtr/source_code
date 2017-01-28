@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="3">
+    <Name Value="ttouch"/>
+    <CompilerOptions>
+      <Version Value="8"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="$(LazarusDir)/lcl/units/$(TargetCPU)-$(TargetOS)/;$(LazarusDir)/lcl/units/$(TargetCPU)-$(TargetOS)/$(LCLWidgetType)/;$(LazarusDir)/components/codetools/units/$(TargetCPU)-$(TargetOS)/"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <Other>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Files Count="10">
+      <Item1>
+        <Filename Value="tswitchbutton.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="tswitchbutton"/>
+      </Item1>
+      <Item2>
+        <Filename Value="timagebutton.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="timagebutton"/>
+      </Item2>
+      <Item3>
+        <Filename Value="tgraphiclabel.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="tgraphiclabel"/>
+      </Item3>
+      <Item4>
+        <Filename Value="tthrobber.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="TThrobber"/>
+      </Item4>
+      <Item5>
+        <Filename Value="buttonslider.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="ButtonSlider"/>
+      </Item5>
+      <Item6>
+        <Filename Value="vertbuttonslider.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="VertButtonSlider"/>
+      </Item6>
+      <Item7>
+        <Filename Value="horizprogressbar.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="HorizProgressBar"/>
+      </Item7>
+      <Item8>
+        <Filename Value="graphicpanel.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="GraphicPanel"/>
+      </Item8>
+      <Item9>
+        <Filename Value="graphicmemo.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="GraphicMemo"/>
+      </Item9>
+      <Item10>
+        <Filename Value="multistatebutton.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="MultiStateButton"/>
+      </Item10>
+    </Files>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="LCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

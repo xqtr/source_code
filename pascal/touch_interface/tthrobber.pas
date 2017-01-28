@@ -1,0 +1,103 @@
+unit TThrobber;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls;
+
+type
+
+  { TTThrobber }
+
+  TTThrobber = class(TImage)
+  private
+    ftimer:ttimer;
+    factive:boolean;
+    fframes,
+    findex,
+    finterval:integer;
+    fpath,
+    fimage,
+    fext:string;
+    procedure setactive(Value: boolean);
+    procedure Animate(Sender: TObject);// of object;
+    procedure setinterval(Value: integer);
+    Procedure setpath(value:string);
+  protected
+
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+  published
+    { Published declarations }
+    Property Active:boolean read factive write setactive;
+    Property Path:string read fpath write setpath;
+    Property ImageFile:string read fimage write fimage;
+    Property Extension:string read fext write fext;
+    Property Frames:integer read fframes write fframes default 8;
+    Property Interval:integer read finterval write setinterval default 300;
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Touch',[TTThrobber]);
+end;
+
+{ TTThrobber }
+
+procedure TTThrobber.setactive(Value: boolean);
+begin
+  factive:=value;
+  visible:=value;
+  BringToFront;
+  ftimer.Enabled:=value;
+end;
+
+procedure TTThrobber.Animate(Sender: TObject);
+begin
+  if (fpath='') or (fext='') or (fimage='') then exit;
+  findex:=findex+1;
+  if findex>fframes then findex:=1;
+  picture.LoadFromFile(fpath+fimage+'_'+inttostr(findex)+fext);
+end;
+
+procedure TTThrobber.setinterval(Value: integer);
+begin
+  finterval:=value;
+  ftimer.Interval:=value;
+end;
+
+procedure TTThrobber.setpath(value: string);
+begin
+  fpath:=IncludeTrailingPathDelimiter(value);
+end;
+
+constructor TTThrobber.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  ftimer:=ttimer.Create(aowner);
+  factive:=false;
+  fframes:=0;
+  fpath:='';
+  fimage:='';
+  fext:='.png';
+  findex:=0;
+  finterval:=300;
+  ftimer.OnTimer:=@animate;
+  ftimer.Interval:=finterval;
+end;
+
+destructor TTThrobber.Destroy;
+begin
+  ftimer.Enabled:=false;
+  ftimer.free;
+  inherited Destroy;
+end;
+
+end.
